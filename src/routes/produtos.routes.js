@@ -26,7 +26,7 @@ router.post("/produtos", (req, res) => {
   produtos.push(novoProduto)
 
   res.status(201).json({
-    mensagem: "Produto criado",
+    mensagem: "Produto criado com sucesso",
     dados: novoProduto
   })
 })
