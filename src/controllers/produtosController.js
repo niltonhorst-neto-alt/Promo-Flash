@@ -1,19 +1,19 @@
-const produtos = [
-  {
-    id: 1,
-    nome: "Notebook Gamer",
-    preco: 4999.90
-  }
-]
+import { PrismaClient } from "@prisma/client"
 
-export function listarProdutos(req, res) {
+const prisma = new PrismaClient()
+
+export async function listarProdutos(req, res) {
+  const produtos = await prisma.produto.findMany()
+
   res.status(200).json(produtos)
 }
 
-export function buscarProduto(req, res) {
+export async function buscarProduto(req, res) {
   const id = Number(req.params.id)
 
-  const produto = produtos.find(p => p.id === id)
+  const produto = await prisma.produto.findUnique({
+    where: { id }
+  })
 
   if (!produto) {
     return res.status(404).json({
@@ -24,19 +24,62 @@ export function buscarProduto(req, res) {
   res.status(200).json(produto)
 }
 
-export function criarProduto(req, res) {
+export async function criarProduto(req, res) {
   const { nome, preco } = req.body
 
-  const novoProduto = {
-    id: produtos.length + 1,
-    nome,
-    preco
-  }
-
-  produtos.push(novoProduto)
+  const produto = await prisma.produto.create({
+    data: {
+      nome,
+      preco
+    }
+  })
 
   res.status(201).json({
     mensagem: "Produto criado",
-    dados: novoProduto
+    dados: produto
   })
+}
+
+export async function atualizarProduto(req, res) {
+  const id = Number(req.params.id)
+  const { nome, preco } = req.body
+
+  try {
+    const produto = await prisma.produto.update({
+      where: { id },
+      data: {
+        nome,
+        preco
+      }
+    })
+
+    res.status(200).json({
+      mensagem: "Produto atualizado",
+      dados: produto
+    })
+
+  } catch {
+    res.status(404).json({
+      mensagem: "Produto não encontrado"
+    })
+  }
+}
+
+export async function deletarProduto(req, res) {
+  const id = Number(req.params.id)
+
+  try {
+    await prisma.produto.delete({
+      where: { id }
+    })
+
+    res.status(200).json({
+      mensagem: "Produto deletado com sucesso"
+    })
+
+  } catch {
+    res.status(404).json({
+      mensagem: "Produto não encontrado"
+    })
+  }
 }
