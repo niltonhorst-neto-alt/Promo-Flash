@@ -1,4 +1,5 @@
 import { Router } from "express"
+import { validarProduto } from "../middlewares/validarProduto.js"
 
 import {
   listarProdutos,
@@ -14,9 +15,9 @@ router.get("/produtos", listarProdutos)
 
 router.get("/produtos/:id", buscarProduto)
 
-router.post("/produtos", criarProduto)
+router.post("/produtos", validarProduto, criarProduto)
 
-router.put("/produtos/:id", atualizarProduto)
+router.put("/produtos/:id", validarProduto, atualizarProduto)
 
 router.delete("/produtos/:id", deletarProduto)
 
