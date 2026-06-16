@@ -1,23 +1,16 @@
 {
-  "name": "eletroflash-api",
+  "name": "projeto-fastify",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.js"
+    "start": "node --watch server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.19.3",
-    "express": "^5.2.1",
-    "morgan": "^1.11.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.14",
-    "prisma": "^6.19.3"
+    "fastify": "^5.8.5"
   }
 }
