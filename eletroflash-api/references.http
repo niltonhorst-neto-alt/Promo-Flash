@@ -1,0 +1,23 @@
+###
+
+GET http://localhost:3000/itens
+
+###
+
+POST http://localhost:3000/itens
+Content-Type: application/json
+
+{
+  "nome": "teste"
+}
+
+###
+
+PUT http://localhost:3000/itens/1
+{
+  "nome": "novo nome"
+}
+
+###
+
+DELETE http://localhost:3000/itens/1
