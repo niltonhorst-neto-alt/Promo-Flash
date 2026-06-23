@@ -15,4 +15,14 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Notebook Dell",
+  "preco": 6500
+}
+
+###
+
 DELETE http://localhost:3000/produtos/1

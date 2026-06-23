@@ -31,6 +31,27 @@ router.post("/produtos", (req, res) => {
   })
 })
 
+router.put("/produtos/:id", (req, res) => {
+  const id = Number(req.params.id)
+  const produto = produtos.find(p => p.id === id)
+
+  if (!produto) {
+    return res.status(404).json({
+      mensagem: "Produto não encontrado"
+    })
+  }
+
+  const { nome, preco } = req.body
+
+  produto.nome = nome
+  produto.preco = preco
+
+  res.status(200).json({
+    mensagem: "Produto atualizado com sucesso",
+    dados: produto
+  })
+})
+
 router.get("/produtos/:id", (req, res) => {
   const id = Number(req.params.id)
 
