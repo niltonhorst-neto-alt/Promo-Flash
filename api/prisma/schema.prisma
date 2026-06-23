@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Produto {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  preco     Float
+  createdAt DateTime @default(now())
+}
+
 model Usuario {
   id      Int      @id @default(autoincrement())
   nome    String
@@ -15,9 +22,14 @@ model Usuario {
 }
 
 model Pedido {
-  id         Int      @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   valorTotal Float
   usuarioId  Int
+  usuario    Usuario @relation(fields: [usuarioId], references: [id])
+}
 
-  usuario Usuario @relation(fields: [usuarioId], references: [id])
+model produtos {
+  id    Int     @id @default(autoincrement())
+  nome  String  @db.VarChar(255)
+  preco Decimal @db.Decimal(10, 2)
 }
