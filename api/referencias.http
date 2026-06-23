@@ -9,8 +9,13 @@ POST http://localhost:3000/produtos
 Content-Type: application/json
 
 {
-    "nome": "Mouse Gamer",
-    "preco": 199.90
+  "nome": "Notebook Gamer",
+  "preco": 4999.90,
+  "descricao": "RTX 4060",
+  "estoque": 15,
+  "categoria": "Informática",
+  "marca": "Dell",
+  "ativo": true
 }
 
 ###
@@ -19,8 +24,13 @@ PUT http://localhost:3000/produtos/1
 Content-Type: application/json
 
 {
-  "nome": "Notebook Dell",
-  "preco": 6500
+  "nome": "Notebook Gamer DELL G15",
+  "preco": 4999.90,
+  "descricao": "RTX 3050",
+  "estoque": 67,
+  "categoria": "Informática",
+  "marca": "Dell",
+  "ativo": true
 }
 
 ###

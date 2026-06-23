@@ -8,10 +8,22 @@ datasource db {
 }
 
 model Produto {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  preco     Float
-  createdAt DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+
+  nome         String
+  preco        Float
+
+  data         DateTime @default(now())
+
+  descricao    String?
+  estoque      Int
+  categoria    String
+  marca        String
+
+  ativo        Boolean  @default(true)
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
 }
 
 model Usuario {
@@ -24,12 +36,7 @@ model Usuario {
 model Pedido {
   id         Int     @id @default(autoincrement())
   valorTotal Float
+
   usuarioId  Int
   usuario    Usuario @relation(fields: [usuarioId], references: [id])
-}
-
-model produtos {
-  id    Int     @id @default(autoincrement())
-  nome  String  @db.VarChar(255)
-  preco Decimal @db.Decimal(10, 2)
 }

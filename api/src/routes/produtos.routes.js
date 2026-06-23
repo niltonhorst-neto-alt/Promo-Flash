@@ -12,11 +12,25 @@ router.get("/produtos", async (req, res) => {
 
 // CRIAR
 router.post("/produtos", async (req, res) => {
-  const { nome, preco } = req.body
+  const {
+    nome,
+    preco,
+    descricao,
+    estoque,
+    categoria,
+    marca,
+    ativo
+  } = req.body
+
   const produto = await prisma.produto.create({
     data: {
       nome,
-      preco
+      preco,
+      descricao,
+      estoque,
+      categoria,
+      marca,
+      ativo
     }
   })
 
@@ -42,13 +56,12 @@ router.get("/produtos/:id", async (req, res) => {
 // ATUALIZAR
 router.put("/produtos/:id", async (req, res) => {
   const id = Number(req.params.id)
-  const { nome, preco } = req.body
+
   const produto = await prisma.produto.update({
-    where: { id },
-    data: {
-      nome,
-      preco
-    }
+    where: {
+      id
+    },
+    data: req.body
   })
 
   res.json(produto)
